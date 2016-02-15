@@ -171,6 +171,7 @@ c3_chart_internal_fn.initParams = function () {
 };
 
 c3_chart_internal_fn.initChartElements = function () {
+    console.log('initChartElements');
     if (this.initBar) { this.initBar(); }
     if (this.initLine) { this.initLine(); }
     if (this.initArc) { this.initArc(); }

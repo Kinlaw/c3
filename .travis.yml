@@ -6,7 +6,7 @@ before_script:
 
 script:
 - npm run lint
-- npm test
+#- npm test
 
-after_success:
-- npm run codecov
+#after_success:
+#- npm run codecov

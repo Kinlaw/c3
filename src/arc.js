@@ -409,6 +409,7 @@ c3_chart_internal_fn.redrawArc = function (duration, durationForExit, withTransf
     }
 };
 c3_chart_internal_fn.initGauge = function () {
+    console.log('initGauge');
     var arcs = this.arcs;
     if (this.hasType('gauge')) {
         arcs.append('path')

@@ -3,7 +3,7 @@
 
     /*global define, module, exports, require */
 
-    var c3 = { version: "working-tag" };
+    var c3 = { version: "0.4.11-rc4" };
 
     var c3_chart_fn,
         c3_chart_internal_fn,
@@ -176,6 +176,7 @@
     };
 
     c3_chart_internal_fn.initChartElements = function () {
+        window.console.log('initChartElements');
         if (this.initBar) { this.initBar(); }
         if (this.initLine) { this.initLine(); }
         if (this.initArc) { this.initArc(); }
@@ -4864,6 +4865,7 @@
     };
 
     c3_chart_internal_fn.getArcRatio = function (d) {
+        window.console.log('getArcRation');
         var $$ = this,
             whole = $$.hasType('gauge') ? Math.PI : (Math.PI * 2);
         return d ? (d.endAngle - d.startAngle) / whole : null;
@@ -5146,6 +5148,7 @@
             .style("opacity", $$.hasType('donut') || $$.hasType('gauge') ? 1 : 0);
 
         if ($$.hasType('gauge')) {
+            window.console.log('hasType(gauge)');
             $$.arcs.select('.' + CLASS.chartArcsBackground)
                 .attr("d", function () {
                     var d = {
@@ -5169,6 +5172,7 @@
         }
     };
     c3_chart_internal_fn.initGauge = function () {
+        window.console.log('initGauge');
         var arcs = this.arcs;
         if (this.hasType('gauge')) {
             arcs.append('path')
