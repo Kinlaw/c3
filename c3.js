@@ -1251,8 +1251,9 @@
             gauge_width: undefined,
             gauge_expand: {},
             gauge_expand_duration: 50,
+            // CHANGEME
             gauge_full_circle: false,
-            gauge_starting_angle: -1 * Math.PI
+            gauge_starting_angle: -1 * Math.PI,
             // donut
             donut_label_show: true,
             donut_label_format: undefined,
@@ -5181,13 +5182,13 @@
                 .attr("dy", ".75em")
                 .text(config.gauge_label_show ? config.gauge_units : '');
             $$.arcs.select('.' + CLASS.chartArcsGaugeMin)
-                .attr("dx", -1 * ($$.innerRadius + ($$.radius - $$.innerRadius) / (config.gauge_full_circle ? 1 : 2)) + "px")
+                .attr("dx", -1 * ($$.innerRadius + (($$.radius - $$.innerRadius) / (config.gauge_full_circle ? 1 : 2))) + "px")
                 // CHANGEME
                 // .attr("dx", -1 * ($$.innerRadius + (($$.radius - $$.innerRadius) / 2)) + "px")
                 .attr("dy", "1.2em")
                 .text(config.gauge_label_show ? config.gauge_min : '');
             $$.arcs.select('.' + CLASS.chartArcsGaugeMax)
-                .attr("dx", $$.innerRadius + ($$.radius - $$.innerRadius / (cofnig.gauge_full_circle ? 1 : 2)) + "px")
+                .attr("dx", $$.innerRadius + (($$.radius - $$.innerRadius) / (cofnig.gauge_full_circle ? 1 : 2)) + "px")
                 // CHANGEME
                 // .attr("dx", $$.innerRadius + (($$.radius - $$.innerRadius) / 2) + "px")
                 .attr("dy", "1.2em")
