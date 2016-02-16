@@ -427,7 +427,7 @@
         $$.arcWidth = $$.width - ($$.isLegendRight ? legendWidth + 10 : 0);
         $$.arcHeight = $$.height - ($$.isLegendRight ? 0 : 10);
         console.log('arcHeight');
-        console.log(arcHeight);
+        console.log($$.arcHeight);
         // CHANGEME
         if ($$.hasType('gauge')) {
             console.log('gauge arcHeight');
