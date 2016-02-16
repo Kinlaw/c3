@@ -4817,9 +4817,9 @@
             gMax = config.gauge_max;
             gTic = (Math.PI) / (gMax - gMin);
             gValue = d.value < gMin ? 0 : d.value < gMax ? d.value - gMin : (gMax - gMin);
-            d.startAngle = -1 * Math.PI;
-            // CHANGEME
-            // d.startAngle = -1 * (Math.PI / 2);
+            // d.startAngle = -1 * Math.PI;
+            // CHANGEDBACK
+            d.startAngle = -1 * (Math.PI / 2);
             d.endAngle = d.startAngle + gTic * gValue;
         }
         return found ? d : null;
