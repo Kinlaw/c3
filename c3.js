@@ -426,10 +426,15 @@
         // for arc
         $$.arcWidth = $$.width - ($$.isLegendRight ? legendWidth + 10 : 0);
         $$.arcHeight = $$.height - ($$.isLegendRight ? 0 : 10);
+        console.log('arcHeight');
+        console.log(arcHeight);
         // CHANGEME
-        // if ($$.hasType('gauge')) {
-        //     $$.arcHeight += $$.height - $$.getGaugeLabelHeight();
-        // }
+        if ($$.hasType('gauge')) {
+            console.log('gauge arcHeight');
+            console.log($$.height);
+            console.log($$.getGaugeLabelHeight());
+            $$.arcHeight += $$.height - $$.getGaugeLabelHeight();
+        }
         if ($$.updateRadius) { $$.updateRadius(); }
 
         if ($$.isLegendRight && hasArc) {
