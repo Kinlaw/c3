@@ -4793,9 +4793,6 @@
             found = false, index = 0,
             gMin, gMax, gTic, gValue;
 
-        console.log('config');
-        console.log(config);
-
         if (!config) {
             return null;
         }

@@ -102,7 +102,6 @@ c3_chart_internal_fn.transformForArcLabel = function (d) {
 };
 
 c3_chart_internal_fn.getArcRatio = function (d) {
-    console.log('getArcRation');
     var $$ = this,
         whole = $$.hasType('gauge') ? Math.PI : (Math.PI * 2);
     return d ? (d.endAngle - d.startAngle) / whole : null;
@@ -385,7 +384,6 @@ c3_chart_internal_fn.redrawArc = function (duration, durationForExit, withTransf
         .style("opacity", $$.hasType('donut') || $$.hasType('gauge') ? 1 : 0);
 
     if ($$.hasType('gauge')) {
-        console.log('hasType(gauge)');
         $$.arcs.select('.' + CLASS.chartArcsBackground)
             .attr("d", function () {
                 var d = {
@@ -409,7 +407,6 @@ c3_chart_internal_fn.redrawArc = function (duration, durationForExit, withTransf
     }
 };
 c3_chart_internal_fn.initGauge = function () {
-    console.log('initGauge');
     var arcs = this.arcs;
     if (this.hasType('gauge')) {
         arcs.append('path')
