@@ -427,9 +427,9 @@
         $$.arcWidth = $$.width - ($$.isLegendRight ? legendWidth + 10 : 0);
         $$.arcHeight = $$.height - ($$.isLegendRight ? 0 : 10);
         // CHANGEME
-        // if ($$.hasType('gauge')) {
-        //     $$.arcHeight += $$.height - $$.getGaugeLabelHeight();
-        // }
+        if ($$.hasType('gauge')) {
+            $$.arcHeight += $$.height - $$.getGaugeLabelHeight();
+        }
         if ($$.updateRadius) { $$.updateRadius(); }
 
         if ($$.isLegendRight && hasArc) {
@@ -1251,7 +1251,8 @@
             gauge_width: undefined,
             gauge_expand: {},
             gauge_expand_duration: 50,
-            gauge_rotation: 180,
+            gauge_full_circle: false,
+            gauge_starting_angle: -1 * Math.PI
             // donut
             donut_label_show: true,
             donut_label_format: undefined,
@@ -2661,7 +2662,7 @@
             h = config.size_height ? config.size_height : $$.getParentHeight();
         console.log('getCurrentHeight');
         console.log(config);
-        return h > 0 ? h : 320 // / ($$.hasType('gauge') ? 2 : 1); 
+        return h > 0 ? h : 320 / ($$.hasType('gauge') && !config.gauge_full_circle ? 2 : 1); 
         // CHANGEME
     };
     c3_chart_internal_fn.getCurrentPaddingTop = function () {
@@ -4819,7 +4820,8 @@
         if ($$.isGaugeType(d.data)) {
             gMin = config.gauge_min;
             gMax = config.gauge_max;
-            gTic = (Math.PI * 2) / (gMax - gMin);
+            // if gauge is full circle then create full circle gTic
+            gTic = (Math.PI * (config.gauge_full_circle ? 2 : 1) / (gMax - gMin);
             // CHANGEME
             // gTic = (Math.PI) / (gMax - gMin);
             gValue = d.value < gMin ? 0 : d.value < gMax ? d.value - gMin : (gMax - gMin);
@@ -4878,7 +4880,8 @@
         // var $$ = this,
         //     whole = $$.hasType('gauge') ? Math.PI : (Math.PI * 2);
         // CHANGEME
-        var whole = Math.PI * 2;
+        // if gauge is full circle then create whole circle
+        var whole = Math.PI * ($$.hasType('gauge') && !config.gauge_full_circle ? 1 : 2);
         return d ? (d.endAngle - d.startAngle) / whole : null;
     };
 
@@ -5054,7 +5057,7 @@
             .style("opacity", 0)
             .each(function (d) {
                 if ($$.isGaugeType(d.data)) {
-                    d.startAngle = d.endAngle = -1 * Math.PI;
+                    d.startAngle = d.endAngle = config.gauge_starting_angle;
                     // CHANGEME
                     //d.startAngle = d.endAngle = -1 * (Math.PI / 2);
                 }
@@ -5169,8 +5172,8 @@
                         // startAngle: -1 * (Math.PI / 2),
                         // endAngle: Math.PI / 2
                         // CHANGEME
-                        startAngle: -1 * Math.PI,
-                        endAngle: Math.PI
+                        startAngle: config.gauge_starting_angle,
+                        endAngle: -1 * config.gauge_starting_angle
                     };
                     return $$.getArc(d, true, true);
                 });
@@ -5178,13 +5181,13 @@
                 .attr("dy", ".75em")
                 .text(config.gauge_label_show ? config.gauge_units : '');
             $$.arcs.select('.' + CLASS.chartArcsGaugeMin)
-                .attr("dx", -1 * ($$.innerRadius + ($$.radius - $$.innerRadius)) + "px")
+                .attr("dx", -1 * ($$.innerRadius + ($$.radius - $$.innerRadius) / (config.gauge_full_circle ? 1 : 2)) + "px")
                 // CHANGEME
                 // .attr("dx", -1 * ($$.innerRadius + (($$.radius - $$.innerRadius) / 2)) + "px")
                 .attr("dy", "1.2em")
                 .text(config.gauge_label_show ? config.gauge_min : '');
             $$.arcs.select('.' + CLASS.chartArcsGaugeMax)
-                .attr("dx", $$.innerRadius + ($$.radius - $$.innerRadius) + "px")
+                .attr("dx", $$.innerRadius + ($$.radius - $$.innerRadius / (cofnig.gauge_full_circle ? 1 : 2)) + "px")
                 // CHANGEME
                 // .attr("dx", $$.innerRadius + (($$.radius - $$.innerRadius) / 2) + "px")
                 .attr("dy", "1.2em")
