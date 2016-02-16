@@ -2663,7 +2663,7 @@
             h = config.size_height ? config.size_height : $$.getParentHeight();
         console.log('getCurrentHeight');
         console.log(config);
-        return h > 0 ? h : 320 / ($$.hasType('gauge') && !config.gauge_full_circle ? 2 : 1); 
+        return h > 0 ? h : 320 / ($$.hasType('gauge') && !config.gauge_fullCircle ? 2 : 1); 
         // CHANGEME
     };
     c3_chart_internal_fn.getCurrentPaddingTop = function () {
@@ -4822,7 +4822,7 @@
             gMin = config.gauge_min;
             gMax = config.gauge_max;
             // if gauge is full circle then create full circle gTic
-            gTic = (Math.PI * (config.gauge_full_circle ? 2 : 1)) / (gMax - gMin);
+            gTic = (Math.PI * (config.gauge_fullCircle ? 2 : 1)) / (gMax - gMin);
             // CHANGEME
             // gTic = (Math.PI) / (gMax - gMin);
             gValue = d.value < gMin ? 0 : d.value < gMax ? d.value - gMin : (gMax - gMin);
@@ -4884,7 +4884,7 @@
         // if gauge is full circle then create whole circle
         var $$ = this,
             config = $$.config,
-            whole = Math.PI * ($$.hasType('gauge') && !config.gauge_full_circle ? 1 : 2);
+            whole = Math.PI * ($$.hasType('gauge') && !config.gauge_fullCircle ? 1 : 2);
         return d ? (d.endAngle - d.startAngle) / whole : null;
     };
 
@@ -5184,13 +5184,13 @@
                 .attr("dy", ".75em")
                 .text(config.gauge_label_show ? config.gauge_units : '');
             $$.arcs.select('.' + CLASS.chartArcsGaugeMin)
-                .attr("dx", -1 * ($$.innerRadius + (($$.radius - $$.innerRadius) / (config.gauge_full_circle ? 1 : 2))) + "px")
+                .attr("dx", -1 * ($$.innerRadius + (($$.radius - $$.innerRadius) / (config.gauge_fullCircle ? 1 : 2))) + "px")
                 // CHANGEME
                 // .attr("dx", -1 * ($$.innerRadius + (($$.radius - $$.innerRadius) / 2)) + "px")
                 .attr("dy", "1.2em")
                 .text(config.gauge_label_show ? config.gauge_min : '');
             $$.arcs.select('.' + CLASS.chartArcsGaugeMax)
-                .attr("dx", $$.innerRadius + (($$.radius - $$.innerRadius) / (config.gauge_full_circle ? 1 : 2)) + "px")
+                .attr("dx", $$.innerRadius + (($$.radius - $$.innerRadius) / (config.gauge_fullCircle ? 1 : 2)) + "px")
                 // CHANGEME
                 // .attr("dx", $$.innerRadius + (($$.radius - $$.innerRadius) / 2) + "px")
                 .attr("dy", "1.2em")
