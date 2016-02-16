@@ -5060,7 +5060,7 @@
             .style("opacity", 0)
             .each(function (d) {
                 if ($$.isGaugeType(d.data)) {
-                    d.startAngle = d.endAngle = config.gauge_starting_angle;
+                    d.startAngle = d.endAngle = config.gauge_startingAngle;
                     // CHANGEME
                     //d.startAngle = d.endAngle = -1 * (Math.PI / 2);
                 }
@@ -5175,8 +5175,8 @@
                         // startAngle: -1 * (Math.PI / 2),
                         // endAngle: Math.PI / 2
                         // CHANGEME
-                        startAngle: config.gauge_starting_angle,
-                        endAngle: -1 * config.gauge_starting_angle
+                        startAngle: config.gauge_startingAngle,
+                        endAngle: -1 * config.gauge_startingAngle
                     };
                     return $$.getArc(d, true, true);
                 });
