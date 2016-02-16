@@ -425,8 +425,9 @@
         // for arc
         $$.arcWidth = $$.width - ($$.isLegendRight ? legendWidth + 10 : 0);
         $$.arcHeight = $$.height - ($$.isLegendRight ? 0 : 10);
-        if ($$.hasType('gauge')) {
-            $$.arcHeight += $$.height - $$.getGaugeLabelHeight();
+        // CHANGEME
+        // if ($$.hasType('gauge')) {
+        //     $$.arcHeight += $$.height - $$.getGaugeLabelHeight();
         }
         if ($$.updateRadius) { $$.updateRadius(); }
 
@@ -2656,7 +2657,8 @@
     c3_chart_internal_fn.getCurrentHeight = function () {
         var $$ = this, config = $$.config,
             h = config.size_height ? config.size_height : $$.getParentHeight();
-        return h > 0 ? h : 320 / ($$.hasType('gauge') ? 2 : 1);
+        return h > 0 ? h : 320 // / ($$.hasType('gauge') ? 2 : 1); 
+        // CHANGEME
     };
     c3_chart_internal_fn.getCurrentPaddingTop = function () {
         var $$ = this,
@@ -4815,7 +4817,9 @@
             gMax = config.gauge_max;
             gTic = (Math.PI) / (gMax - gMin);
             gValue = d.value < gMin ? 0 : d.value < gMax ? d.value - gMin : (gMax - gMin);
-            d.startAngle = -1 * (Math.PI / 2);
+            d.startAngle = -1 * Math.PI;
+            // CHANGEME
+            // d.startAngle = -1 * (Math.PI / 2);
             d.endAngle = d.startAngle + gTic * gValue;
         }
         return found ? d : null;
@@ -5017,6 +5021,7 @@
             .style("opacity", 0)
             .style("text-anchor", "middle")
             .style("pointer-events", "none");
+        // Gauge Text; look back at this
         // MEMO: can not keep same color..., but not bad to update color in redraw
         //mainPieUpdate.exit().remove();
     };
@@ -5044,7 +5049,9 @@
             .style("opacity", 0)
             .each(function (d) {
                 if ($$.isGaugeType(d.data)) {
-                    d.startAngle = d.endAngle = -1 * (Math.PI / 2);
+                    d.startAngle = d.endAngle = -1 * Math.PI;
+                    // CHANGEME
+                    //d.startAngle = d.endAngle = -1 * (Math.PI / 2);
                 }
                 this._current = d;
             });
@@ -5167,11 +5174,15 @@
                 .attr("dy", ".75em")
                 .text(config.gauge_label_show ? config.gauge_units : '');
             $$.arcs.select('.' + CLASS.chartArcsGaugeMin)
-                .attr("dx", -1 * ($$.innerRadius + (($$.radius - $$.innerRadius) / 2)) + "px")
+                .attr("dx", -1 * ($$.innerRadius + ($$.radius - $$.innerRadius)) + "px")
+                // CHANGEME
+                // .attr("dx", -1 * ($$.innerRadius + (($$.radius - $$.innerRadius) / 2)) + "px")
                 .attr("dy", "1.2em")
                 .text(config.gauge_label_show ? config.gauge_min : '');
             $$.arcs.select('.' + CLASS.chartArcsGaugeMax)
-                .attr("dx", $$.innerRadius + (($$.radius - $$.innerRadius) / 2) + "px")
+                .attr("dx", $$.innerRadius + ($$.radius - $$.innerRadius) + "px")
+                // CHANGEME
+                // .attr("dx", $$.innerRadius + (($$.radius - $$.innerRadius) / 2) + "px")
                 .attr("dy", "1.2em")
                 .text(config.gauge_label_show ? config.gauge_max : '');
         }
