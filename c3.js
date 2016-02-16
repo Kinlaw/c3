@@ -5190,7 +5190,7 @@
                 .attr("dy", "1.2em")
                 .text(config.gauge_label_show ? config.gauge_min : '');
             $$.arcs.select('.' + CLASS.chartArcsGaugeMax)
-                .attr("dx", $$.innerRadius + (($$.radius - $$.innerRadius) / (cofnig.gauge_full_circle ? 1 : 2)) + "px")
+                .attr("dx", $$.innerRadius + (($$.radius - $$.innerRadius) / (config.gauge_full_circle ? 1 : 2)) + "px")
                 // CHANGEME
                 // .attr("dx", $$.innerRadius + (($$.radius - $$.innerRadius) / 2) + "px")
                 .attr("dy", "1.2em")
