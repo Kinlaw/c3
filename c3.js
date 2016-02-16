@@ -4815,7 +4815,9 @@
         if ($$.isGaugeType(d.data)) {
             gMin = config.gauge_min;
             gMax = config.gauge_max;
-            gTic = (Math.PI) / (gMax - gMin);
+            gTic = (Math.PI * 2) / (gMax - gMin);
+            // CHANGEME
+            // gTic = (Math.PI) / (gMax - gMin);
             gValue = d.value < gMin ? 0 : d.value < gMax ? d.value - gMin : (gMax - gMin);
             // d.startAngle = -1 * Math.PI;
             // CHANGEDBACK
