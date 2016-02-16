@@ -4883,6 +4883,7 @@
         // CHANGEME
         // if gauge is full circle then create whole circle
         var $$ = this,
+            config = $$.config,
             whole = Math.PI * ($$.hasType('gauge') && !config.gauge_full_circle ? 1 : 2);
         return d ? (d.endAngle - d.startAngle) / whole : null;
     };
