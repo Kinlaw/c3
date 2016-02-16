@@ -2658,6 +2658,8 @@
     c3_chart_internal_fn.getCurrentHeight = function () {
         var $$ = this, config = $$.config,
             h = config.size_height ? config.size_height : $$.getParentHeight();
+        console.log('getCurrentHeight');
+        console.log(config);
         return h > 0 ? h : 320 // / ($$.hasType('gauge') ? 2 : 1); 
         // CHANGEME
     };
