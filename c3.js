@@ -29,6 +29,8 @@
     }
 
     function Chart(config) {
+        console.log('config');
+        console.log(config);
         var $$ = this.internal = new ChartInternal(this);
         $$.loadConfig(config);
 
