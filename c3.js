@@ -1251,6 +1251,7 @@
             gauge_width: undefined,
             gauge_expand: {},
             gauge_expand_duration: 50,
+            gauge_rotation: 180,
             // donut
             donut_label_show: true,
             donut_label_format: undefined,
