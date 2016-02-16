@@ -41,7 +41,6 @@
         // bind "this" to nested API
         (function bindThis(fn, target, argThis) {
             Object.keys(fn).forEach(function (key) {
-                console.log(key);
                 target[key] = fn[key].bind(argThis);
                 if (Object.keys(fn[key]).length > 0) {
                     bindThis(fn[key], target[key], argThis);
@@ -90,18 +89,14 @@
 
         if (config.data_url) {
             $$.convertUrlToData(config.data_url, config.data_mimeType, config.data_keys, $$.initWithData);
-            console.log('config.data_url');
         }
         else if (config.data_json) {
-            console.log('config.data_json');
             $$.initWithData($$.convertJsonToData(config.data_json, config.data_keys));
         }
         else if (config.data_rows) {
-            console.log('config.data_rows');
             $$.initWithData($$.convertRowsToData(config.data_rows));
         }
         else if (config.data_columns) {
-            console.log('config.data_columns');
             $$.initWithData($$.convertColumnsToData(config.data_columns));
         }
         else {
@@ -1306,7 +1301,7 @@
         var this_config = this.config, target, keys, read;
         function find() {
             var key = keys.shift();
-    //        console.log("key =>", key, ", target =>", target);
+           console.log("key =>", key, ", target =>", target);
             if (key && target && typeof target === 'object' && key in target) {
                 target = target[key];
                 return find();
@@ -1322,7 +1317,7 @@
             target = config;
             keys = key.split('_');
             read = find();
-    //        console.log("CONFIG : ", key, read);
+           console.log("CONFIG : ", key, read);
             if (isDefined(read)) {
                 this_config[key] = read;
             }
