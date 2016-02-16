@@ -1252,8 +1252,8 @@
             gauge_expand: {},
             gauge_expand_duration: 50,
             // CHANGEME
-            gauge_full_circle: false,
-            gauge_starting_angle: -1 * Math.PI,
+            gauge_fullCircle: false,
+            gauge_startingAngle: -1 * Math.PI,
             // donut
             donut_label_show: true,
             donut_label_format: undefined,
