@@ -4821,7 +4821,7 @@
             gMin = config.gauge_min;
             gMax = config.gauge_max;
             // if gauge is full circle then create full circle gTic
-            gTic = (Math.PI * (config.gauge_full_circle ? 2 : 1) / (gMax - gMin);
+            gTic = (Math.PI * (config.gauge_full_circle ? 2 : 1)) / (gMax - gMin);
             // CHANGEME
             // gTic = (Math.PI) / (gMax - gMin);
             gValue = d.value < gMin ? 0 : d.value < gMax ? d.value - gMin : (gMax - gMin);
