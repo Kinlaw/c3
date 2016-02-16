@@ -29,8 +29,6 @@
     }
 
     function Chart(config) {
-        console.log('config');
-        console.log(config);
         var $$ = this.internal = new ChartInternal(this);
         $$.loadConfig(config);
 
@@ -426,13 +424,9 @@
         // for arc
         $$.arcWidth = $$.width - ($$.isLegendRight ? legendWidth + 10 : 0);
         $$.arcHeight = $$.height - ($$.isLegendRight ? 0 : 10);
-        console.log('arcHeight');
-        console.log($$.arcHeight);
         // CHANGEME
-        if ($$.hasType('gauge')) {
-            console.log('gauge arcHeight');
-            console.log($$.height);
-            console.log($$.getGaugeLabelHeight());
+        // if ($$.hasType('gauge')) {
+        if ($$.hasType('gauge') && !config.gauge_fullCircle) {
             $$.arcHeight += $$.height - $$.getGaugeLabelHeight();
         }
         if ($$.updateRadius) { $$.updateRadius(); }
@@ -1309,7 +1303,7 @@
         var this_config = this.config, target, keys, read;
         function find() {
             var key = keys.shift();
-           console.log("key =>", key, ", target =>", target);
+            // console.log("key =>", key, ", target =>", target);
             if (key && target && typeof target === 'object' && key in target) {
                 target = target[key];
                 return find();
@@ -1325,7 +1319,7 @@
             target = config;
             keys = key.split('_');
             read = find();
-           console.log("CONFIG : ", key, read);
+            // console.log("CONFIG : ", key, read);
             if (isDefined(read)) {
                 this_config[key] = read;
             }
@@ -2666,8 +2660,6 @@
     c3_chart_internal_fn.getCurrentHeight = function () {
         var $$ = this, config = $$.config,
             h = config.size_height ? config.size_height : $$.getParentHeight();
-        console.log('getCurrentHeight');
-        console.log(config);
         return h > 0 ? h : 320 / ($$.hasType('gauge') && !config.gauge_fullCircle ? 2 : 1); 
         // CHANGEME
     };
