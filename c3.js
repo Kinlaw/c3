@@ -4866,8 +4866,10 @@
 
     c3_chart_internal_fn.getArcRatio = function (d) {
         console.log('getArcRation');
-        var $$ = this,
-            whole = $$.hasType('gauge') ? Math.PI : (Math.PI * 2);
+        // var $$ = this,
+        //     whole = $$.hasType('gauge') ? Math.PI : (Math.PI * 2);
+        // CHANGEME
+        var whole = Math.PI * 2;
         return d ? (d.endAngle - d.startAngle) / whole : null;
     };
 
@@ -5153,8 +5155,11 @@
                 .attr("d", function () {
                     var d = {
                         data: [{value: config.gauge_max}],
-                        startAngle: -1 * (Math.PI / 2),
-                        endAngle: Math.PI / 2
+                        // startAngle: -1 * (Math.PI / 2),
+                        // endAngle: Math.PI / 2
+                        // CHANGEME
+                        startAngle: -1 * Math.PI,
+                        endAngle: Math.PI
                     };
                     return $$.getArc(d, true, true);
                 });
