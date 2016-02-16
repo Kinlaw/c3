@@ -428,7 +428,7 @@
         // CHANGEME
         // if ($$.hasType('gauge')) {
         //     $$.arcHeight += $$.height - $$.getGaugeLabelHeight();
-        }
+        // }
         if ($$.updateRadius) { $$.updateRadius(); }
 
         if ($$.isLegendRight && hasArc) {
