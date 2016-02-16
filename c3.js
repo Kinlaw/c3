@@ -90,14 +90,18 @@
 
         if (config.data_url) {
             $$.convertUrlToData(config.data_url, config.data_mimeType, config.data_keys, $$.initWithData);
+            console.log('config.data_url');
         }
         else if (config.data_json) {
+            console.log('config.data_json');
             $$.initWithData($$.convertJsonToData(config.data_json, config.data_keys));
         }
         else if (config.data_rows) {
+            console.log('config.data_rows');
             $$.initWithData($$.convertRowsToData(config.data_rows));
         }
         else if (config.data_columns) {
+            console.log('config.data_columns');
             $$.initWithData($$.convertColumnsToData(config.data_columns));
         }
         else {
