@@ -176,7 +176,6 @@
     };
 
     c3_chart_internal_fn.initChartElements = function () {
-        console.log('initChartElements');
         if (this.initBar) { this.initBar(); }
         if (this.initLine) { this.initLine(); }
         if (this.initArc) { this.initArc(); }
@@ -4794,6 +4793,9 @@
             found = false, index = 0,
             gMin, gMax, gTic, gValue;
 
+        console.log('config');
+        console.log(config);
+
         if (!config) {
             return null;
         }
@@ -4871,7 +4873,6 @@
     };
 
     c3_chart_internal_fn.getArcRatio = function (d) {
-        console.log('getArcRation');
         // var $$ = this,
         //     whole = $$.hasType('gauge') ? Math.PI : (Math.PI * 2);
         // CHANGEME
@@ -5159,7 +5160,6 @@
             .style("opacity", $$.hasType('donut') || $$.hasType('gauge') ? 1 : 0);
 
         if ($$.hasType('gauge')) {
-            console.log('hasType(gauge)');
             $$.arcs.select('.' + CLASS.chartArcsBackground)
                 .attr("d", function () {
                     var d = {
@@ -5190,7 +5190,6 @@
         }
     };
     c3_chart_internal_fn.initGauge = function () {
-        console.log('initGauge');
         var arcs = this.arcs;
         if (this.hasType('gauge')) {
             arcs.append('path')
