@@ -424,7 +424,7 @@
         // for arc
         $$.arcWidth = $$.width - ($$.isLegendRight ? legendWidth + 10 : 0);
         $$.arcHeight = $$.height - ($$.isLegendRight ? 0 : 10);
-        if ($$.hasType('gauge')) {
+        if ($$.hasType('gauge') && !config.gauge_fullCircle) {
             $$.arcHeight += $$.height - $$.getGaugeLabelHeight();
         }
         if ($$.updateRadius) { $$.updateRadius(); }
@@ -1240,10 +1240,12 @@
             pie_expand: {},
             pie_expand_duration: 50,
             // gauge
+            gauge_fullCircle: false,
             gauge_label_show: true,
             gauge_label_format: undefined,
             gauge_min: 0,
             gauge_max: 100,
+            gauge_startingAngle: -1 * Math.PI,
             gauge_units: undefined,
             gauge_width: undefined,
             gauge_expand: {},
@@ -2655,7 +2657,7 @@
     c3_chart_internal_fn.getCurrentHeight = function () {
         var $$ = this, config = $$.config,
             h = config.size_height ? config.size_height : $$.getParentHeight();
-        return h > 0 ? h : 320 / ($$.hasType('gauge') ? 2 : 1);
+        return h > 0 ? h : 320 / ($$.hasType('gauge') && !config.gauge_fullCircle ? 2 : 1); 
     };
     c3_chart_internal_fn.getCurrentPaddingTop = function () {
         var $$ = this,
@@ -4812,9 +4814,9 @@
         if ($$.isGaugeType(d.data)) {
             gMin = config.gauge_min;
             gMax = config.gauge_max;
-            gTic = (Math.PI) / (gMax - gMin);
+            gTic = (Math.PI * (config.gauge_fullCircle ? 2 : 1)) / (gMax - gMin);
             gValue = d.value < gMin ? 0 : d.value < gMax ? d.value - gMin : (gMax - gMin);
-            d.startAngle = -1 * (Math.PI / 2);
+            d.startAngle = config.gauge_startingAngle;
             d.endAngle = d.startAngle + gTic * gValue;
         }
         return found ? d : null;
@@ -4865,7 +4867,8 @@
 
     c3_chart_internal_fn.getArcRatio = function (d) {
         var $$ = this,
-            whole = $$.hasType('gauge') ? Math.PI : (Math.PI * 2);
+            config = $$.config,
+            whole = Math.PI * ($$.hasType('gauge') && !config.gauge_fullCircle ? 1 : 2);
         return d ? (d.endAngle - d.startAngle) / whole : null;
     };
 
@@ -5040,7 +5043,7 @@
             .style("opacity", 0)
             .each(function (d) {
                 if ($$.isGaugeType(d.data)) {
-                    d.startAngle = d.endAngle = -1 * (Math.PI / 2);
+                    d.startAngle = d.endAngle = config.gauge_startingAngle;
                 }
                 this._current = d;
             });
@@ -5150,8 +5153,8 @@
                 .attr("d", function () {
                     var d = {
                         data: [{value: config.gauge_max}],
-                        startAngle: -1 * (Math.PI / 2),
-                        endAngle: Math.PI / 2
+                        startAngle: config.gauge_startingAngle,
+                        endAngle: -1 * config.gauge_startingAngle
                     };
                     return $$.getArc(d, true, true);
                 });
@@ -5159,11 +5162,11 @@
                 .attr("dy", ".75em")
                 .text(config.gauge_label_show ? config.gauge_units : '');
             $$.arcs.select('.' + CLASS.chartArcsGaugeMin)
-                .attr("dx", -1 * ($$.innerRadius + (($$.radius - $$.innerRadius) / 2)) + "px")
+                .attr("dx", -1 * ($$.innerRadius + (($$.radius - $$.innerRadius) / (config.gauge_fullCircle ? 1 : 2))) + "px")
                 .attr("dy", "1.2em")
                 .text(config.gauge_label_show ? config.gauge_min : '');
             $$.arcs.select('.' + CLASS.chartArcsGaugeMax)
-                .attr("dx", $$.innerRadius + (($$.radius - $$.innerRadius) / 2) + "px")
+                .attr("dx", $$.innerRadius + (($$.radius - $$.innerRadius) / (config.gauge_fullCircle ? 1 : 2)) + "px")
                 .attr("dy", "1.2em")
                 .text(config.gauge_label_show ? config.gauge_max : '');
         }
